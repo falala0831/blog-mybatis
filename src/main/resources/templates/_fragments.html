@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:replace="${title}">博客详情</title>
+    <link rel="stylesheet" href="../static/css/semantic.min.css" th:href="@{/css/semantic.min.css}">
+    <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
+    <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
+    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+    <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="../static/js/semantic.min.js" th:src="@{/js/semantic.min.js}"></script>
+    <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+    <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+<!--    <script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>-->
+    <script src="../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+</head>
+<body>
+
+<!--导航-->
+<nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small m-opacity-tiny">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui blue header item" style="font-family: STSong">Blog</h2>
+            <a href="#" th:href="@{/}" class="m-item item" th:classappend="${n==1} ? 'active'">首页</a>
+            <a href="#" th:href="@{/types/-1}" class="m-item item" th:classappend="${n==2} ? 'active'">分类</a>
+            <a href="#" th:href="@{/archives}" class="m-item item" th:classappend="${n==3} ? 'active'">归档</a>
+            <a href="#" th:href="@{/admin/index}" class="m-item item">后台</a>
+            <div class="right m-item item m-mobile-hide">
+                <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
+                    <div class="ui icon inverted transparent input m-margin-tb-tiny" style="color: white">
+                        <input style="color: white" type="text" name="query" placeholder="Search...." th:value="${query}">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!--    底部-->
+<footer class="ui inverted vertical segment m-padded-tb m-opacity-tiny" th:fragment="footer">
+<!--    &lt;!&ndash;引入网易云音乐播放器插件，固定右下角显示&ndash;&gt;-->
+<!--    <div style="display:block;position: fixed;bottom: -45px;right: 280px;width: 0%;z-index:9999" >-->
+<!--        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450-->
+<!--                src="//music.163.com/outchain/player?type=0&id=2589054943&auto=1&height=430"></iframe>-->
+<!--    </div>-->
+<!--    使用aplayer+MetingJs-->
+
+    <div class="ui center aligned container">
+        <div class="ui divided grid">
+            <div class="four wide column">
+                <img src="../static/images/cat1.jpg" th:src="@{/images/cat1.jpg}" class="ui rounded image" alt="" style="width: 100px">
+            </div>
+            <div class="four wide column">
+                <img src="../static/images/cat2.jpg" th:src="@{/images/cat2.jpg}" class="ui rounded image" alt="" style="width: 100px">
+            </div>
+            <div class="four wide column">
+                <img src="../static/images/cat5.jpg" th:src="@{/images/cat5.jpg}" class="ui rounded image" alt="" style="width: 100px">
+            </div>
+            <div class="four wide column">
+                <img src="../static/images/cat4.jpg" th:src="@{/images/cat4.jpg}" class="ui rounded image" alt="" style="width: 100px">
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2021 BigBone Designed by Lxl</p>
+    </div>
+
+</footer>
+
+</body>
+</html>

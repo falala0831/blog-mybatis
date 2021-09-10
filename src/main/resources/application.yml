@@ -1,0 +1,23 @@
+mybatis:
+  type-aliases-package: com.bigbone.blog.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/myblog?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+  thymeleaf:
+    mode: HTML
+
+logging:
+  level:
+    root: info
+    com.bigbone: debug
+  file:
+    name: log/blog.log
+
+comment.avatar: /images/avatar.png

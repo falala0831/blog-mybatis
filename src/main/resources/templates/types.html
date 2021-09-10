@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+  <meta charset="UTF-8">
+  <title>分类</title>
+  <link rel="stylesheet" href="../static/css/semantic.min.css">
+  <link rel="stylesheet" href="../static/css/me.css">
+  <script src="../static/js/jquery.min.js"></script>
+  <script src="../static/js/semantic.min.js"></script>
+</head>
+<body>
+<!--    导航-->
+<nav th:replace="_fragments :: menu(2)" class="ui inverted attached segment m-padded-tb-mini">
+  <div class="ui container">
+    <div class="ui inverted secondary stackable menu">
+      <h2 class="ui blue header item">BigBone</h2>
+      <a href="#" class="item">首页</a>
+      <a href="#" class="item">分类</a>
+      <a href="#" class="item">标签</a>
+      <a href="#" class="item">归档</a>
+      <div class="right item">
+        <div class="ui input">
+          <input type="text" placeholder="Search">
+          <i class="search link icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!--中间内容-->
+<div class="m-container-small m-padded-tb-big m-opacity-mini">
+  <div class="ui container">
+    <!--header-->
+    <div class="ui top attached segment">
+      <div class="ui middle aligned two column grid">
+        <div class="column">
+          <h3 class="ui blue header">分类</h3>
+        </div>
+        <div class="right aligned column">
+          共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${#arrays.length(types)}"> 14 </h2> 个
+        </div>
+      </div>
+    </div>
+
+    <div class="ui attached segment m-padded-tb-large">
+      <div class="ui labeled button m-margin-tb-tiny" th:each="type : ${types}">
+        <!--classappend: 在不改变标签内class属性的前提下，添加某class样式-->
+        <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="ui basic button" th:classappend="${type.id==activeTypeId} ? 'blue'" th:text="${type.name}">感悟</a>
+<!--        <div class="ui basic left pointing label" th:classappend="${type.id==activeTypeId} ? 'blue'" th:text="${#arrays.length(type.blogs)}">-->
+<!--          5-->
+<!--        </div>-->
+      </div>
+    </div>
+
+    <div class="ui top attached segment">
+      <div class="ui middle aligned two column grid">
+        <div class="column">
+          <h3 class="ui blue header">博客</h3>
+        </div>
+        <div class="right aligned column">
+          共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${pageInfo.total}"> 14 </h2> 篇
+        </div>
+      </div>
+      <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${pageInfo.list}">
+        <div class="ui middle aligned mobile reversed stackable grid">
+          <div class="eleven wide column">
+            <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black" th:text="${blog.title}">计划First</a></h3>
+            <p class="m-text" th:text="|${blog.description}......|">正确做好任何一件事情的前提是清晰、正确的理解目标...</p>
+            <div class="ui middle aligned mobile reversed stackable grid">
+              <div class="eleven wide column">
+                <div class="ui mini horizontal link list">
+                  <div class="item">
+                    <img src="https://unsplash.it/100/100?image=1005" th:src="@{${blog.user.avatar}}"  alt="" class="ui avatar image">
+                    <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">BigBone</a></div>
+                  </div>
+                  <div class="item">
+                    Date: <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2021-04-12</span>
+                  </div>
+                  <div class="item">
+                    Views: <span th:text="${blog.views}">1</span>
+                  </div>
+                </div>
+              </div>
+              <div class="right aligned five wide column">
+                <a href="#" target="_blank"
+                   class="ui blue basic label m-padded-tiny m-text-thin" th:text="${blog.type.name}">感悟</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="five wide column">
+            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+              <img src="https://unsplash.it/800/450?image=1005" th:src="@{${blog.firstPicture}}"  alt="" class="ui rounded image">
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!--footer-->
+    <div class="ui bottom attached segment">
+      <div class="three wide column" align="center">
+        <a class="item" th:href="@{/types(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}" th:unless="${pageInfo.isFirstPage}">上一页</a>
+      </div>
+
+      <div class="ten wide column" align="center">
+        <p> <span th:text="${pageInfo.pageNum}"></span> / <span th:text="${pageInfo.pages}"></span> </p>
+      </div>
+
+      <div class="three wide column" align="center">
+        <a class="item" th:href="@{/types(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}" th:unless="${pageInfo.isLastPage}">下一页</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<br>
+<br>
+<br>
+<!--    底部-->
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment">
+  <div class="ui center aligned container">
+    <div class="ui divided grid">
+      <div class="four wide column">
+        <img src="../static/images/cat1.jpg" class="ui rounded image" alt="" style="width: 100px">
+      </div>
+      <div class="four wide column">
+        <img src="../static/images/cat2.jpg" class="ui rounded image" alt="" style="width: 100px">
+      </div>
+      <div class="four wide column">
+        <img src="../static/images/cat5.jpg" class="ui rounded image" alt="" style="width: 100px">
+      </div>
+      <div class="four wide column">
+        <img src="../static/images/cat4.jpg" class="ui rounded image" alt="" style="width: 100px">
+      </div>
+    </div>
+    <div class="ui inverted section divider"></div>
+    <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2021 BigBone Designed by Lxl</p>
+  </div>
+</footer>
+</body>
+</html>
